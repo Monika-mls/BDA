@@ -1100,46 +1100,4 @@ Cluster Centers: [center1, center2, center3]
 
 The actual cluster labels, center values and score are calculated by the program; they should not be memorized as fixed values.
 
-### What to memorize
 
-| Code                    | Purpose                 |
-| ----------------------- | ----------------------- |
-| `SparkSession`          | Start Spark             |
-| `VectorAssembler`       | Combine feature columns |
-| `KMeans(k=3)`           | Create three clusters   |
-| `fit(data)`             | Train the model         |
-| `transform(data)`       | Predict clusters        |
-| `ClusteringEvaluator()` | Evaluate clustering     |
-| `clusterCenters()`      | Display centroids       |
-
-# Final Lab Internal Revision Checklist
-
-Track your preparation
-
-0 of 5 completed
-
-Pig Simple Logs
-
-LOAD, GROUP, FOREACH, SUM, COUNT, DUMP
-
-Pig Word Count
-
-LOAD, TOKENIZE, FLATTEN, GROUP, COUNT
-
-Sqoop and Hive
-
-MySQL table, Sqoop import, Hive export, Sqoop export
-
-Data Visualization
-
-Five Python plot functions and their graphs
-
-Mahout-style PySpark
-
-VectorAssembler, KMeans, fit, transform, evaluation
-
-These are the programs based on the syllabus you supplied and the relevant sections of your BDA record. The short Pig and PySpark implementations supplement the PDF where full code is not provided.
-
-For tomorrow's internal, prioritize being able to reproduce Aim, System Requirements, Theory, Procedure, Program Code and Expected Output for each question. In Pig and Sqoop, knowing the sequence of commands is particularly important. In visualization, memorize the common imports and five plot functions. In PySpark, concentrate on feature assembly, K-Means fitting and evaluation.
-
-We can now revise whichever program you find hardest, using only this exam-writing format.
