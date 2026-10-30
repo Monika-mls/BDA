@@ -1003,7 +1003,31 @@ Install libraries in Google Colab if necessary:
 Single short program for all five visualizations:
 
 ```
-import pandas as pdimport seaborn as snsimport matplotlib.pyplot as pltimport plotly.express as pxdf = sns.load_dataset("iris")print(df.head())# 1. Histogramsns.histplot(df["sepal_length"])plt.title("Histogram")plt.show()# 2. Box Plotsns.boxplot(data=df, x="species", y="sepal_length")plt.title("Box Plot")plt.show()# 3. Scatter Plot with Regressionsns.regplot(data=df, x="sepal_length", y="petal_length")plt.title("Regression Plot")plt.show()# 4. Heatmapsns.heatmap(df.select_dtypes("number").corr(), annot=True)plt.title("Heatmap")plt.show()# 5. 3D Scatter Plotfig = px.scatter_3d(df, x="sepal_length",                    y="sepal_width",                    z="petal_length",                    color="species")fig.show()
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.express as px
+df = sns.load_dataset("iris")
+print(df.head())
+# 1. Histogram
+sns.histplot(df["sepal_length"])
+plt.title("Histogram")
+plt.show()
+# 2. Box Plot
+sns.boxplot(data=df, x="species", y="sepal_length")
+plt.title("Box Plot")
+plt.show()
+# 3. Scatter Plot with Regression
+sns.regplot(data=df, x="sepal_length", y="petal_length")
+plt.title("Regression Plot")
+plt.show()
+# 4. Heatmap
+sns.heatmap(df.select_dtypes("number").corr(), annot=True)
+plt.title("Heatmap")
+plt.show()
+# 5. 3D Scatter Plot
+fig = px.scatter_3d(df, x="sepal_length", y="sepal_width", z="petal_length", color="species")
+fig.show()
 ```
 
 ### 6. Expected Output
@@ -1074,7 +1098,24 @@ First install PySpark in Google Colab:
 Then execute:
 
 ```
-from pyspark.sql import SparkSessionfrom pyspark.ml.feature import VectorAssemblerfrom pyspark.ml.clustering import KMeansfrom pyspark.ml.evaluation import ClusteringEvaluatorfrom sklearn.datasets import load_irisspark = SparkSession.builder.appName("KMeans").getOrCreate()# Load Iris datairis = load_iris()cols = list(iris.feature_names)df = spark.createDataFrame(    [tuple(map(float, row)) for row in iris.data],    cols)# Combine featuresdata = VectorAssembler(    inputCols=cols,    outputCol="features").transform(df)# Apply K-Meansmodel = KMeans(k=3, seed=42).fit(data)result = model.transform(data)# Display resultsresult.select("prediction").show(5)print("Silhouette Score:",      ClusteringEvaluator().evaluate(result))print("Cluster Centers:", model.clusterCenters())
+from pyspark.sql import SparkSession
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.clustering import KMeans
+from pyspark.ml.evaluation import ClusteringEvaluator
+from sklearn.datasets import load_iris
+spark = SparkSession.builder.appName("KMeans").getOrCreate()
+# Load Iris data
+iris = load_iris()
+cols = list(iris.feature_names)
+df = spark.createDataFrame([tuple(map(float, row)) for row in iris.data],   cols)
+# Combine features
+data = VectorAssembler(inputCols=cols, outputCol="features").transform(df)
+# Apply K-Meansmodel = KMeans(k=3, seed=42).fit(data)
+result = model.transform(data)
+# Display results
+result.select("prediction").show(5)
+print("Silhouette Score:", ClusteringEvaluator().evaluate(result))
+print("Cluster Centers:", model.clusterCenters())
 ```
 
 ### 6. Expected Output
